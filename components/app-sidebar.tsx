@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 const navigationItems = [
@@ -47,6 +48,13 @@ interface AppSidebarProps {
 }
 
 export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) {
+  const { setOpenMobile } = useSidebar()
+  
+  const handleMenuItemClick = (sectionId: string) => {
+    onSectionChange(sectionId)
+    setOpenMobile(false) // Close mobile sidebar
+  }
+
   return (
     <Sidebar>
       <SidebarHeader className="p-4 border-b">
@@ -70,7 +78,10 @@ export function AppSidebar({ activeSection, onSectionChange }: AppSidebarProps) 
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton onClick={() => onSectionChange(item.id)} isActive={activeSection === item.id}>
+                  <SidebarMenuButton 
+                    onClick={() => handleMenuItemClick(item.id)} 
+                    isActive={activeSection === item.id}
+                  >
                     <item.icon className="h-4 w-4" />
                     <span>{item.title}</span>
                   </SidebarMenuButton>

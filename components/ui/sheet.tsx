@@ -56,7 +56,7 @@ interface SheetContentProps
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Content>,
   SheetContentProps & { hideTitle?: boolean; defaultTitle?: string }
->(({ side = "right", className, children, hideTitle = false, defaultTitle = "Dialog", ...props }, ref) => {
+>(({ side = "right", className, children, hideTitle = false, defaultTitle = "", ...props }, ref) => {
   const hasTitle = React.Children.toArray(children).some(
     (child) => React.isValidElement(child) && child.type === SheetTitle
   );
